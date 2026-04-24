@@ -1,0 +1,81 @@
+﻿<ContentPage
+    x:Class="CamberGauge.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:utils="clr-namespace:CamberGauge.Utilities"
+    BackgroundColor="#111">
+
+    <ContentPage.Resources>
+        <utils:DegreeToColorConverter x:Key="DegreeToColorConverter" />
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="24,24,24,48" Spacing="18">
+
+            <Label Text="Camber Gauge"
+                   FontSize="32"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <Label Text="{Binding CamberDisplay}"
+                   FontSize="56"
+                   FontAttributes="Bold"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <Label Text="{Binding LevelDisplay}"
+                   FontSize="24"
+                   TextColor="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
+                   HorizontalOptions="Center" />
+
+            <BoxView HeightRequest="16"
+                     WidthRequest="260"
+                     CornerRadius="8"
+                     Color="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
+                     HorizontalOptions="Center" />
+
+            <Label Text="{Binding SensorModeDisplay}"
+                   FontSize="14"
+                   TextColor="Gray"
+                   HorizontalOptions="Center" />
+            <VerticalStackLayout IsVisible="{Binding IsMockMode}"
+                     Spacing="10"
+                     Padding="0,8,0,8">
+
+                <Label Text="{Binding MockCamberDisplay}"
+           TextColor="{StaticResource Gray300}"
+           FontSize="14"
+           HorizontalOptions="Center" />
+
+                <Slider Minimum="-5"
+            Maximum="5"
+            Value="{Binding MockCamberDegrees, Mode=TwoWay}" />
+
+                <Label Text="{Binding MockLevelDisplay}"
+           TextColor="{StaticResource Gray300}"
+           FontSize="14"
+           HorizontalOptions="Center" />
+
+                <Slider Minimum="-2"
+            Maximum="2"
+            Value="{Binding MockLevelDegrees, Mode=TwoWay}" />
+
+            </VerticalStackLayout>
+
+            <Button Text="Start"
+                    Command="{Binding StartCommand}" />
+
+            <Button Text="Stop"
+                    Command="{Binding StopCommand}" />
+
+            <Button Text="Zero / Reset Camber Axis"
+                    Command="{Binding ZeroCommand}" />
+
+            <Label Text="1. Level the application before reading each wheel."
+                   TextColor="Gray"
+                   FontSize="14" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

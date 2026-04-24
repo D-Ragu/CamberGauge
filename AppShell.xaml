@@ -1,0 +1,13 @@
+<Shell
+    x:Class="CamberGauge.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:CamberGauge.Views"
+    Title="CamberGauge">
+
+    <ShellContent
+        Title="Camber Gauge"
+        ContentTemplate="{DataTemplate views:MainPage}"
+        Route="MainPage" />
+
+</Shell>
