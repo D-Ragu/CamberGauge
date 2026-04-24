@@ -1,6 +1,5 @@
 ﻿using CamberGauge.Models;
-using CamberGauge.Utilities;
-using Microsoft.Maui.Devices.Sensors;
+using CamberGauge.Helpers;
 
 namespace CamberGauge.Services.Real;
 

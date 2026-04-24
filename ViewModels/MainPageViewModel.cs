@@ -1,4 +1,5 @@
-﻿using CamberGauge.Models;
+﻿using CamberGauge.Helpers;
+using CamberGauge.Models;
 using CamberGauge.Services;
 using CamberGauge.Services.Mock;
 using CamberGauge.Settings;
@@ -206,7 +207,7 @@ public sealed class MainPageViewModel : INotifyPropertyChanged
 
     private static double Smooth(double previous, double current)
     {
-        return previous + SensorSettings.SmoothingAlpha * (current - previous);
+        return AngleMath.Smooth(previous, current, SensorSettings.SmoothingAlpha);
     }
 
     private bool SetProperty<T>(
