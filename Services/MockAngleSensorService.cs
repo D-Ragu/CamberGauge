@@ -10,7 +10,7 @@ public sealed class MockAngleSensorService : IAngleSensorService
 
     public bool IsRunning { get; private set; }
 
-    public double MockCamberDegrees { get; set; } = -2.0;
+    public double MockCamberDegrees { get; set; } = 0.0;
 
     public double MockLevelDegrees { get; set; } = 0.0;
 
