@@ -27,7 +27,7 @@ public sealed class MainPageViewModel : INotifyPropertyChanged
     private string _levelDisplay = "Level Axis: 0.00°";
     private double _levelRaw;
 
-    private double _mockCamberDegrees = -2.0;
+    private double _mockCamberDegrees = 0.0;
     private double _mockLevelDegrees;
 
     public MainPageViewModel(IAngleSensorService angleSensorService)
