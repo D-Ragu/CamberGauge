@@ -1,5 +1,17 @@
 # 📐 CamberGauge
 
+---
+
+> 🚧 **Under Construction**
+>
+> This project is actively being developed and refined. Features, UI, and accuracy are still evolving.
+
+> ⚠️ **Disclaimer**
+>
+> This application is intended for **educational and enthusiast use only**. Measurements should be verified using professional alignment equipment before making any mechanical adjustments. Use at your own risk.
+
+---
+
 A modern, cross-platform mobile application built with **.NET MAUI** that transforms your smartphone into a precision **wheel camber measurement tool**.
 
 Designed with real-world usability in mind, CamberGauge leverages device sensors, smoothing algorithms, and a clean architecture to provide stable, accurate readings for automotive enthusiasts and motorsports applications.
@@ -137,7 +149,18 @@ All testable logic is extracted into **CamberGauge.Core**, enabling:
 
 ## 📸 Screenshots
 
-> TODO
+## 🎥 Demo
+
+![Demo]
+
+*Position Good*
+![Mock Position Good](docs/MockPositionGood.png)
+
+*Position Not Good*
+![Mock Position Not Good](docs/MockPositionBad.png)
+
+*Reset Only Impacts Camber Reading*
+![Reset](docs/ZeroReset.png)
 
 ---
 
