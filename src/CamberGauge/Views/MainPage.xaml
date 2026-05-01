@@ -3,77 +3,145 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:utils="clr-namespace:CamberGauge.Utilities"
-    BackgroundColor="#111">
+    BackgroundColor="#121212">
 
     <ContentPage.Resources>
         <utils:DegreeToColorConverter x:Key="DegreeToColorConverter" />
     </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="24,24,24,48" Spacing="18">
+        <VerticalStackLayout Padding="20,24,20,48" Spacing="18">
 
-            <Label Text="Camber Gauge"
-                   FontSize="32"
-                   TextColor="White"
-                   HorizontalOptions="Center" />
 
-            <Label Text="{Binding CamberDisplay}"
-                   FontSize="56"
-                   FontAttributes="Bold"
-                   TextColor="White"
-                   HorizontalOptions="Center" />
+            <!-- Main Gauge Card -->
+            <Border BackgroundColor="#1C1C1ECC"
+                    Stroke="#2C2C2E"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 28"
+                    Padding="24">
 
-            <Label Text="{Binding LevelDisplay}"
-                   FontSize="24"
-                   TextColor="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
-                   HorizontalOptions="Center" />
+                <VerticalStackLayout Spacing="20">
 
-            <BoxView HeightRequest="16"
-                     WidthRequest="260"
-                     CornerRadius="8"
-                     Color="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
-                     HorizontalOptions="Center" />
+                    <Label Text="Camber Gauge"
+                           FontSize="30"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
 
-            <Label Text="{Binding SensorModeDisplay}"
-                   FontSize="14"
-                   TextColor="Gray"
-                   HorizontalOptions="Center" />
-            <VerticalStackLayout IsVisible="{Binding IsMockMode}"
-                     Spacing="10"
-                     Padding="0,8,0,8">
+                    <Label Text="{Binding CamberDisplay}"
+                           FontSize="62"
+                           FontAttributes="Bold"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
 
-                <Label Text="{Binding MockCamberDisplay}"
-           TextColor="{StaticResource Gray300}"
-           FontSize="14"
-           HorizontalOptions="Center" />
+                    <Border StrokeThickness="0"
+                            BackgroundColor="#2C2C2ECC"
+                            StrokeShape="RoundRectangle 18"
+                            Padding="14,8"
+                            HorizontalOptions="Center">
 
-                <Slider Minimum="-5"
-            Maximum="5"
-            Value="{Binding MockCamberDegrees, Mode=TwoWay}" />
+                        <HorizontalStackLayout Spacing="8">
 
-                <Label Text="{Binding MockLevelDisplay}"
-           TextColor="{StaticResource Gray300}"
-           FontSize="14"
-           HorizontalOptions="Center" />
+                            <BoxView WidthRequest="8"
+                                     HeightRequest="8"
+                                     CornerRadius="4"
+                                     VerticalOptions="Center"
+                                     Color="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}" />
 
-                <Slider Minimum="-2"
-            Maximum="2"
-            Value="{Binding MockLevelDegrees, Mode=TwoWay}" />
+                            <Label Text="{Binding LevelStatusDisplay}"
+                                   TextColor="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   VerticalOptions="Center" />
+
+                        </HorizontalStackLayout>
+                    </Border>
+
+                    <Label Text="{Binding LevelDisplay}"
+                           FontSize="20"
+                           TextColor="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
+                           HorizontalOptions="Center" />
+
+                    <BoxView HeightRequest="16"
+                             WidthRequest="260"
+                             CornerRadius="8"
+                             Color="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
+                             HorizontalOptions="Center" />
+
+                    <Label Text="{Binding SensorModeDisplay}"
+                           FontSize="13"
+                           TextColor="#8E8E93"
+                           HorizontalOptions="Center" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Mock Controls Card -->
+            <Border BackgroundColor="#1C1C1E99"
+                    Stroke="#2C2C2E"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 22"
+                    Padding="18"
+                    IsVisible="{Binding IsMockMode}">
+
+                <VerticalStackLayout Spacing="12">
+
+                    <Label Text="Mock Sensor Controls"
+                           FontSize="15"
+                           FontAttributes="Bold"
+                           TextColor="#F5F5F7" />
+
+                    <Label Text="{Binding MockCamberDisplay}"
+                           TextColor="#C7C7CC"
+                           FontSize="14"
+                           HorizontalOptions="Center" />
+
+                    <Slider Minimum="-5"
+                            Maximum="5"
+                            Value="{Binding MockCamberDegrees, Mode=TwoWay}" />
+
+                    <Label Text="{Binding MockLevelDisplay}"
+                           TextColor="#C7C7CC"
+                           FontSize="14"
+                           HorizontalOptions="Center" />
+
+                    <Slider Minimum="-2"
+                            Maximum="2"
+                            Value="{Binding MockLevelDegrees, Mode=TwoWay}" />
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Action Buttons -->
+            <VerticalStackLayout Spacing="10">
+
+                <Button Text="Start"
+                        Command="{Binding StartCommand}"
+                        BackgroundColor="#0A84FF"
+                        TextColor="White"
+                        CornerRadius="14"
+                        HeightRequest="50" />
+
+                <Button Text="Stop"
+                        Command="{Binding StopCommand}"
+                        BackgroundColor="#3A3A3C"
+                        TextColor="White"
+                        CornerRadius="14"
+                        HeightRequest="50" />
+
+                <Button Text="Zero / Reset Camber Axis"
+                        Command="{Binding ZeroCommand}"
+                        BackgroundColor="#1C1C1E"
+                        TextColor="White"
+                        CornerRadius="14"
+                        HeightRequest="50" />
 
             </VerticalStackLayout>
 
-            <Button Text="Start"
-                    Command="{Binding StartCommand}" />
-
-            <Button Text="Stop"
-                    Command="{Binding StopCommand}" />
-
-            <Button Text="Zero / Reset Camber Axis"
-                    Command="{Binding ZeroCommand}" />
-
-            <Label Text="1. Level the application before reading each wheel."
-                   TextColor="Gray"
-                   FontSize="14" />
+            <Label Text="Level the device before taking a reading"
+                   TextColor="#8E8E93"
+                   FontSize="13"
+                   HorizontalOptions="Center"
+                   Opacity="{Binding LevelWarningOpacity}" />
 
         </VerticalStackLayout>
     </ScrollView>

@@ -30,6 +30,10 @@ public sealed class MainPageViewModel : INotifyPropertyChanged
     private double _mockCamberDegrees = 0.0;
     private double _mockLevelDegrees;
 
+    private string _levelStatusDisplay = "Not Level";
+    private double _levelGoodOpacity = 0.25;
+    private double _levelWarningOpacity = 1.0;
+
     public MainPageViewModel(IAngleSensorService angleSensorService)
     {
         _angleSensorService = angleSensorService;
@@ -115,6 +119,24 @@ public sealed class MainPageViewModel : INotifyPropertyChanged
     public string MockLevelDisplay =>
         $"Mock Level: {MockLevelDegrees:+0.00;-0.00;0.00}°";
 
+    public string LevelStatusDisplay
+    {
+        get => _levelStatusDisplay;
+        private set => SetProperty(ref _levelStatusDisplay, value);
+    }
+
+    public double LevelGoodOpacity
+    {
+        get => _levelGoodOpacity;
+        private set => SetProperty(ref _levelGoodOpacity, value);
+    }
+
+    public double LevelWarningOpacity
+    {
+        get => _levelWarningOpacity;
+        private set => SetProperty(ref _levelWarningOpacity, value);
+    }
+
     private void Start()
     {
         _angleSensorService.Start();
@@ -163,6 +185,11 @@ public sealed class MainPageViewModel : INotifyPropertyChanged
 
         var camberAdjusted = _smoothedCamber - _camberZeroOffset;
         var isLevel = Math.Abs(_smoothedLevel) <= SensorSettings.LevelToleranceDegrees;
+
+        LevelStatusDisplay = isLevel ? "Ready to Measure" : "Level Phone";
+
+        LevelGoodOpacity = isLevel ? 1.0 : 0.25;
+        LevelWarningOpacity = isLevel ? 0.25 : 1.0;
 
         LevelRaw = _smoothedLevel;
 
