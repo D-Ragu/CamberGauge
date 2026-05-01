@@ -10,70 +10,122 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout Padding="24,24,24,48" Spacing="18">
+        <VerticalStackLayout Padding="24,24,24,48" Spacing="20">
 
+            <!-- Title -->
             <Label Text="Camber Gauge"
                    FontSize="32"
                    TextColor="White"
                    HorizontalOptions="Center" />
 
+            <!-- Big Camber Value -->
             <Label Text="{Binding CamberDisplay}"
                    FontSize="56"
                    FontAttributes="Bold"
                    TextColor="White"
                    HorizontalOptions="Center" />
 
+            <!-- Status Pill -->
+            <Border StrokeThickness="0"
+                    BackgroundColor="#1C1C1E"
+                    StrokeShape="RoundRectangle 18"
+                    Padding="14,8"
+                    HorizontalOptions="Center">
+
+                <HorizontalStackLayout Spacing="8">
+
+                    <!-- Status Dot -->
+                    <BoxView WidthRequest="8"
+                             HeightRequest="8"
+                             CornerRadius="4"
+                             VerticalOptions="Center"
+                             Color="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}" />
+
+                    <!-- Status Text -->
+                    <Label Text="{Binding LevelStatusDisplay}"
+                           TextColor="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
+                           FontSize="14"
+                           FontAttributes="Bold"
+                           VerticalOptions="Center" />
+
+                </HorizontalStackLayout>
+            </Border>
+
+            <!-- Level Readout -->
             <Label Text="{Binding LevelDisplay}"
-                   FontSize="24"
+                   FontSize="20"
                    TextColor="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
                    HorizontalOptions="Center" />
 
+            <!-- Level Bar -->
             <BoxView HeightRequest="16"
                      WidthRequest="260"
                      CornerRadius="8"
                      Color="{Binding LevelRaw, Converter={StaticResource DegreeToColorConverter}}"
                      HorizontalOptions="Center" />
 
+            <!-- Sensor Mode -->
             <Label Text="{Binding SensorModeDisplay}"
-                   FontSize="14"
-                   TextColor="Gray"
+                   FontSize="13"
+                   TextColor="#888"
                    HorizontalOptions="Center" />
+
+            <!-- Mock Controls -->
             <VerticalStackLayout IsVisible="{Binding IsMockMode}"
-                     Spacing="10"
-                     Padding="0,8,0,8">
+                                 Spacing="10"
+                                 Padding="0,8,0,8">
 
                 <Label Text="{Binding MockCamberDisplay}"
-           TextColor="{StaticResource Gray300}"
-           FontSize="14"
-           HorizontalOptions="Center" />
+                       TextColor="#CCC"
+                       FontSize="14"
+                       HorizontalOptions="Center" />
 
                 <Slider Minimum="-5"
-            Maximum="5"
-            Value="{Binding MockCamberDegrees, Mode=TwoWay}" />
+                        Maximum="5"
+                        Value="{Binding MockCamberDegrees, Mode=TwoWay}" />
 
                 <Label Text="{Binding MockLevelDisplay}"
-           TextColor="{StaticResource Gray300}"
-           FontSize="14"
-           HorizontalOptions="Center" />
+                       TextColor="#CCC"
+                       FontSize="14"
+                       HorizontalOptions="Center" />
 
                 <Slider Minimum="-2"
-            Maximum="2"
-            Value="{Binding MockLevelDegrees, Mode=TwoWay}" />
+                        Maximum="2"
+                        Value="{Binding MockLevelDegrees, Mode=TwoWay}" />
 
             </VerticalStackLayout>
 
-            <Button Text="Start"
-                    Command="{Binding StartCommand}" />
+            <!-- Buttons (cleaner layout) -->
+            <VerticalStackLayout Spacing="10">
 
-            <Button Text="Stop"
-                    Command="{Binding StopCommand}" />
+                <Button Text="Start"
+                        Command="{Binding StartCommand}"
+                        BackgroundColor="#2E7DFF"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="48" />
 
-            <Button Text="Zero / Reset Camber Axis"
-                    Command="{Binding ZeroCommand}" />
+                <Button Text="Stop"
+                        Command="{Binding StopCommand}"
+                        BackgroundColor="#444"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="48" />
 
-            <Label Text="1. Level the application before reading each wheel."
-                   TextColor="Gray"
-                   FontSize="14" />
+                <Button Text="Zero / Reset Camber Axis"
+                        Command="{Binding ZeroCommand}"
+                        BackgroundColor="#1C1C1E"
+                        TextColor="White"
+                        CornerRadius="12"
+                        HeightRequest="48" />
+            </VerticalStackLayout>
+
+            <!-- Helper Text (fades) -->
+            <Label Text="Level the device before taking a reading"
+                   TextColor="#888"
+                   FontSize="13"
+                   HorizontalOptions="Center"
+                   Opacity="{Binding LevelWarningOpacity}" />
 
         </VerticalStackLayout>
     </ScrollView>
