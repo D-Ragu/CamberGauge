@@ -148,19 +148,9 @@ All testable logic is extracted into **CamberGauge.Core**, enabling:
 ---
 
 ## 📸 Screenshots
+<img width="526" height="952" alt="CamberGaugeSmall" src="https://github.com/user-attachments/assets/e74f6c9b-59f1-4729-93c6-0359e1d3fdfe" />
 
-## 🎥 Demo
 
-![Demo]
-
-*Position Good*
-![Mock Position Good](docs/MockPositionGood.png)
-
-*Position Not Good*
-![Mock Position Not Good](docs/MockPositionBad.png)
-
-*Reset Only Impacts Camber Reading*
-![Reset](docs/ZeroReset.png)
 
 ---
 
